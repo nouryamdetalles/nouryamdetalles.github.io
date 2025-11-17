@@ -1,0 +1,32 @@
+
+body { font-family: sans-serif; background:#f7e4ea; color:#000; margin:0; padding:0; }
+header { text-align:center; padding:20px 0; }
+.logo { width:130px; }
+
+.titulo { text-align:center; margin-top:30px; font-size:24px; }
+
+.catalogo { display:flex; flex-wrap:wrap; justify-content:center; gap:15px; padding:20px; }
+.producto { width:150px; background:white; border:2px solid #e7b6c7; border-radius:15px; padding:10px; cursor:pointer; }
+
+.carrusel { display:flex; overflow-x:auto; gap:10px; padding:20px; }
+.pedido { width:150px; border-radius:12px; }
+
+footer { padding:30px; text-align:center; }
+
+/* MODAL */
+.modal { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.6); justify-content:center; align-items:center; }
+.modal-box { background:white; padding:20px; border-radius:20px; width:90%; max-width:400px; border:2px solid #e7b6c7; text-align:center; }
+
+.btn { background:white; border:2px solid #e7b6c7; padding:10px 15px; border-radius:12px; cursor:pointer; margin-top:10px; }
+.btn.cerrar { background:#e7b6c7; color:white; }
+.btn.whatsapp { background:#25D366; color:white; }
+
+/* CARRITO */
+.carrito-panel {
+  position:fixed; top:20px; right:20px; background:white; padding:15px;
+  width:260px; border:2px solid #e7b6c7; border-radius:15px; display:none; z-index:9999;
+}
+.carrito-btn {
+  position:fixed; bottom:20px; right:20px; background:white;
+  border:2px solid #e7b6c7; padding:12px 20px; border-radius:15px; cursor:pointer;
+}
