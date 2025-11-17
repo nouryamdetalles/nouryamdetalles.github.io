@@ -1,101 +1,65 @@
 
 let productos = [
-  {id:1,nombre:'Producto 1',img:['img/producto1.png'],desc:'Descripción completa del producto 1.',precio:10},
-  {id:2,nombre:'Producto 2',img:['img/producto2.png'],desc:'Descripción completa del producto 2.',precio:12},
-  {id:3,nombre:'Producto 3',img:['img/producto3.png'],desc:'Descripción completa del producto 3.',precio:8},
-  {id:4,nombre:'Producto 4',img:['img/producto4.png'],desc:'Descripción completa del producto 4.',precio:15},
-  {id:5,nombre:'Producto 5',img:['img/producto5.png'],desc:'Descripción completa.',precio:9},
-  {id:6,nombre:'Producto 6',img:['img/producto6.png'],desc:'Descripción completa.',precio:11},
-  {id:7,nombre:'Producto 7',img:['img/producto7.png'],desc:'Descripción completa.',precio:14},
-  {id:8,nombre:'Producto 8',img:['img/producto8.png'],desc:'Descripción completa.',precio:16},
-  {id:9,nombre:'Producto 9',img:['img/producto9.png'],desc:'Descripción completa.',precio:7},
-  {id:10,nombre:'Producto 10',img:['img/producto10.png'],desc:'Descripción completa.',precio:13}
+  {id:1,nombre:'Cojín Personalizado',precio:22,img:'img/p1.jpg'},
+  {id:2,nombre:'Taza con Nombre',precio:12,img:'img/p2.jpg'},
+  {id:3,nombre:'Lámpara con Foto',precio:29,img:'img/p3.jpg'},
+  {id:4,nombre:'Pulsera Iniciales',precio:18,img:'img/p4.jpg'},
+  {id:5,nombre:'Marco Personalizado',precio:15,img:'img/p5.jpg'},
+  {id:6,nombre:'Botella Grabada',precio:20,img:'img/p6.jpg'}
 ];
 
-let carrito=[];
+let CART = {};
 
-window.onload=()=>{ cargarCatalogo(); };
-
-function cargarCatalogo(){
-  let cont=document.getElementById('catalogo');
+function renderProducts(){
+  const grid=document.getElementById("products-grid");
+  grid.innerHTML='';
   productos.forEach(p=>{
-    let div=document.createElement('div');
-    div.className='producto';
-    div.innerHTML=`<img src="${p.img[0]}" style="width:100%;border-radius:12px;"><br><b>${p.nombre}</b><br>${p.precio}€`;
-    div.onclick=()=>abrirProducto(p.id);
-    cont.appendChild(div);
+    grid.innerHTML+=`
+      <div class="card">
+        <img src="${p.img}" style="width:100%;height:200px;object-fit:cover;border-radius:10px;">
+        <h3>${p.nombre}</h3>
+        <p><strong>${p.precio} €</strong></p>
+        <button onclick="addToCart(${p.id})">Añadir</button>
+      </div>`;
+  });
+}
+renderProducts();
+
+function addToCart(id){
+  if(!CART[id]){
+    let p=productos.find(x=>x.id===id);
+    CART[id]={...p,qty:1};
+  } else CART[id].qty++;
+  updateCart();
+}
+
+function updateCart(){
+  document.getElementById("cart-count").textContent=
+    Object.values(CART).reduce((s,p)=>s+p.qty,0);
+  renderCartDropdown();
+}
+
+function toggleCart(){
+  document.getElementById("cart-dropdown").classList.toggle("open");
+}
+
+function renderCartDropdown(){
+  const dd=document.getElementById("cart-dropdown");
+  dd.innerHTML='';
+  const items=Object.values(CART);
+  if(items.length===0){ dd.innerHTML='<p>Carrito vacío</p>'; return; }
+  items.forEach(it=>{
+    dd.innerHTML+=`
+      <div>
+        <img src="${it.img}" width="40">
+        ${it.nombre} x ${it.qty}
+        <button onclick="removeItem(${it.id})">-</button>
+      </div>`;
   });
 }
 
-function abrirProducto(id){
-  let p=productos.find(x=>x.id===id);
-  let slider=document.getElementById('modalSlider');
-  slider.innerHTML="";
-  p.img.forEach(f=> slider.innerHTML += `<img src="${f}">`);
-
-  document.getElementById('modalTitulo').textContent=p.nombre;
-  document.getElementById('modalDesc').textContent=p.desc;
-  document.getElementById('modalPrecio').textContent=p.precio+'€';
-
-  document.getElementById('modalBtn').onclick=()=>agregarAlCarrito(id);
-  document.getElementById('modalProducto').style.display='flex';
-}
-
-function cerrarModal(){ document.getElementById('modalProducto').style.display='none'; }
-
-/* CARRITO */
-function abrirCarrito(){ document.getElementById('carritoPanel').style.display='block'; }
-function cerrarCarrito(){ document.getElementById('carritoPanel').style.display='none'; }
-
-function agregarAlCarrito(id){
-  let p=productos.find(x=>x.id===id);
-  let e=carrito.find(x=>x.id===id);
-  if(e){ e.cantidad++; }
-  else{ carrito.push({...p,cantidad:1}); }
-  renderCarrito();
-}
-
-function cambiarCantidad(i,v){
-  carrito[i].cantidad=Math.max(1,carrito[i].cantidad+v);
-  renderCarrito();
-}
-
-function eliminarDelCarrito(i){
-  carrito.splice(i,1);
-  renderCarrito();
-}
-
-function renderCarrito(){
-  let l=document.getElementById('carritoLista');
-  l.innerHTML="";
-  let tot=0;
-
-  carrito.forEach((item,i)=>{
-    tot += item.precio * item.cantidad;
-    l.innerHTML += `
-      <li>${item.nombre} - ${item.precio}€<br>
-      <button onclick="cambiarCantidad(${i},-1)">-</button>
-      ${item.cantidad}
-      <button onclick="cambiarCantidad(${i},1)">+</button>
-      <button onclick="eliminarDelCarrito(${i})">X</button>
-      </li>`;
-  });
-
-  document.getElementById('totalCarrito').textContent=tot.toFixed(2)+'€';
-}
-
-function enviarWhatsapp(){
-  let nombre=document.getElementById('clienteNombre').value;
-  let tel=document.getElementById('clienteTelefono').value;
-  let notas=document.getElementById('clienteNotas').value;
-
-  let msg=`Pedido:%0A`;
-  carrito.forEach(c=> msg+=`• ${c.nombre} x${c.cantidad} = ${c.precio*c.cantidad}€%0A`);
-
-  msg+=`%0ATotal: ${document.getElementById('totalCarrito').textContent}`;
-  msg+=`%0ACliente: ${nombre}`;
-  msg+=`%0ATeléfono: ${tel}`;
-  msg+=`%0ANotas: ${notas}`;
-
-  window.open("https://wa.me/?text="+msg,"_blank");
+function removeItem(id){
+  if(CART[id].qty>1) CART[id].qty--;
+  else delete CART[id];
+  updateCart();
 }
