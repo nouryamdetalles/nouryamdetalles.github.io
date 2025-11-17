@@ -2,79 +2,48 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<title>NOURYAM DETALLES</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NOURYAM DETALLES — Tienda</title>
 <link rel="stylesheet" href="css/style.css">
-<link href="https://fonts.googleapis.com/css2?family:Playfair+Display:wght@400;600&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
 </head>
 <body>
 
-<header>
-  <img src="img/logo.png" class="logo">
-  <h1 class="titulo-principal">NOURYAM DETALLES</h1>
+<header class="header">
+  <div class="logo-area">
+    <img src="img/logo.png" class="logo-circle">
+    <div class="titles">
+      <h1>NOURYAM DETALLES</h1>
+      <h2>Detalles y Regalos Personalizados</h2>
+    </div>
+  </div>
+
+  <div class="cart-icon" onclick="toggleCart()">
+    <img src="img/cart.png">
+    <div id="cart-count" class="cart-count">0</div>
+  </div>
+
+  <div id="cart-dropdown"></div>
 </header>
 
-<div class="carrito-btn" onclick="abrirCarrito()">🛒</div>
+<section class="catalog">
+  <div id="products-grid" class="grid"></div>
+</section>
 
-<h2 class="subtitulo">Catálogo</h2>
-<section id="catalogo" class="catalogo"></section>
-
-<h2 class="subtitulo">Vuestros últimos pedidos</h2>
-<div class="carrusel" id="carrusel">
-<img src="img/pedido1.png" class="pedido">
-<img src="img/pedido2.png" class="pedido">
-<img src="img/pedido3.png" class="pedido">
-<img src="img/pedido4.png" class="pedido">
-<img src="img/pedido5.png" class="pedido">
-<img src="img/pedido6.png" class="pedido">
-<img src="img/pedido7.png" class="pedido">
-<img src="img/pedido8.png" class="pedido">
-<img src="img/pedido9.png" class="pedido">
-<img src="img/pedido10.png" class="pedido">
-<img src="img/pedido11.png" class="pedido">
-<img src="img/pedido12.png" class="pedido">
-<img src="img/pedido13.png" class="pedido">
-<img src="img/pedido14.png" class="pedido">
-<img src="img/pedido15.png" class="pedido">
-<img src="img/pedido16.png" class="pedido">
-<img src="img/pedido17.png" class="pedido">
-<img src="img/pedido18.png" class="pedido">
-<img src="img/pedido19.png" class="pedido">
-<img src="img/pedido20.png" class="pedido">
-</div>
-
-<footer>
-  <h2>FAQ</h2>
-  <details><summary>¿Cómo hago un pedido?</summary><p>Puedes añadir productos al carrito y enviarlos por WhatsApp.</p></details>
-  <details><summary>¿Envíos?</summary><p>Envíos a toda España.</p></details>
-</footer>
-
-<!-- MODAL -->
-<div id="modalProducto" class="modal">
-  <div class="modal-box">
-    <div class="modal-slider" id="modalSlider"></div>
-    <h3 id="modalTitulo"></h3>
-    <p id="modalDesc"></p>
-    <p id="modalPrecio" class="precio"></p>
-    <button id="modalBtn" class="btn">Añadir al carrito</button>
-    <button onclick="cerrarModal()" class="btn cerrar">Cerrar</button>
+<section class="last-orders">
+  <h2>Vuestros últimos pedidos</h2>
+  <div class="carousel">
+    <button class="carousel-btn prev">&#10094;</button>
+    <div class="carousel-track">
+      <img src="img/p1.jpg">
+      <img src="img/p2.jpg">
+      <img src="img/p3.jpg">
+      <img src="img/p4.jpg">
+      <img src="img/p5.jpg">
+      <img src="img/p6.jpg">
+    </div>
+    <button class="carousel-btn next">&#10095;</button>
   </div>
-</div>
-
-<!-- CARRITO PANEL -->
-<div id="carritoPanel" class="carrito-panel">
-  <h3>Carrito</h3>
-  <ul id="carritoLista"></ul>
-  <p><strong>Total:</strong> <span id="totalCarrito">0€</span></p>
-
-  <input type="text" id="clienteNombre" placeholder="Tu nombre">
-  <input type="text" id="clienteTelefono" placeholder="Tu número">
-  <textarea id="clienteNotas" placeholder="Notas (opcional)"></textarea>
-
-  <button onclick="enviarWhatsapp()" class="btn whatsapp">Enviar por WhatsApp</button>
-  <button onclick="cerrarCarrito()" class="btn cerrar">Cerrar</button>
-</div>
-
-<a class="whatsapp-fijo" href="#" onclick="enviarWhatsapp()">💬</a>
+</section>
 
 <script src="js/script.js"></script>
 </body>
