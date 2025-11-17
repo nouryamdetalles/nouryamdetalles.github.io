@@ -1,22 +1,27 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>Nouryam Detalles</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Producto — Nouryam Detalles</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-<header class="header-coquette">
-  <img src="assets/logo.png" class="logo">
-  <nav>
-    <a href="index.html">Inicio</a>
-    <a href="catalogo.html">Catálogo</a>
-    <a href="contacto.html">Contacto</a>
-    <a href="carrito.html">Carrito</a>
-  </nav>
-</header>
-<section class="hero">
-  <h1>Bienvenida a tu tienda coquette</h1>
-</section>
+  <header class="site-header">
+    <div class="wrap">
+      <a href="index.html" class="brand">Nouryam Detalles</a>
+      <nav class="nav">
+        <a href="catalogo.html">Catálogo</a>
+        <a href="carrito.html">Carrito <span id="cart-count" class="cart-count">0</span></a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <div id="product-page"></div>
+  </main>
+
+  <script src="js/app.js"></script>
 </body>
 </html>
