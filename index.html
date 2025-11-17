@@ -4,18 +4,21 @@
 <meta charset="UTF-8">
 <title>NOURYAM DETALLES</title>
 <link rel="stylesheet" href="css/style.css">
+<link href="https://fonts.googleapis.com/css2?family:Playfair+Display:wght@400;600&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
 </head>
 <body>
 
 <header>
   <img src="img/logo.png" class="logo">
-  <h1>NOURYAM DETALLES</h1>
+  <h1 class="titulo-principal">NOURYAM DETALLES</h1>
 </header>
 
-<h2 class="titulo">Catálogo</h2>
+<div class="carrito-btn" onclick="abrirCarrito()">🛒</div>
+
+<h2 class="subtitulo">Catálogo</h2>
 <section id="catalogo" class="catalogo"></section>
 
-<h2 class="titulo">Vuestros últimos pedidos</h2>
+<h2 class="subtitulo">Vuestros últimos pedidos</h2>
 <div class="carrusel" id="carrusel">
 <img src="img/pedido1.png" class="pedido">
 <img src="img/pedido2.png" class="pedido">
@@ -43,34 +46,35 @@
   <h2>FAQ</h2>
   <details><summary>¿Cómo hago un pedido?</summary><p>Puedes añadir productos al carrito y enviarlos por WhatsApp.</p></details>
   <details><summary>¿Envíos?</summary><p>Envíos a toda España.</p></details>
-  <details><summary>¿Métodos de pago?</summary><p>Se confirma el pago por WhatsApp.</p></details>
-
-  <h2>Contacto</h2>
-  <p>Escríbenos por WhatsApp para pedidos personalizados ❤️</p>
 </footer>
 
-<!-- MODAL PRODUCTO -->
+<!-- MODAL -->
 <div id="modalProducto" class="modal">
   <div class="modal-box">
-    <img id="modalImg">
+    <div class="modal-slider" id="modalSlider"></div>
     <h3 id="modalTitulo"></h3>
     <p id="modalDesc"></p>
-    <p id="modalPrecio"></p>
+    <p id="modalPrecio" class="precio"></p>
     <button id="modalBtn" class="btn">Añadir al carrito</button>
     <button onclick="cerrarModal()" class="btn cerrar">Cerrar</button>
   </div>
 </div>
 
-<!-- CARRITO -->
+<!-- CARRITO PANEL -->
 <div id="carritoPanel" class="carrito-panel">
   <h3>Carrito</h3>
   <ul id="carritoLista"></ul>
   <p><strong>Total:</strong> <span id="totalCarrito">0€</span></p>
+
+  <input type="text" id="clienteNombre" placeholder="Tu nombre">
+  <input type="text" id="clienteTelefono" placeholder="Tu número">
+  <textarea id="clienteNotas" placeholder="Notas (opcional)"></textarea>
+
   <button onclick="enviarWhatsapp()" class="btn whatsapp">Enviar por WhatsApp</button>
   <button onclick="cerrarCarrito()" class="btn cerrar">Cerrar</button>
 </div>
 
-<button onclick="abrirCarrito()" class="carrito-btn">🛒 Carrito</button>
+<a class="whatsapp-fijo" href="#" onclick="enviarWhatsapp()">💬</a>
 
 <script src="js/script.js"></script>
 </body>
